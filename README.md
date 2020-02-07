@@ -14,7 +14,7 @@ Mailing list subscriptions are typically created using a "double-opt-in" process
 
 While these data points contribute to a reasonable circumstantial argument that a given subscription is legitimate, all of this data is forgeable, and almost none of it is exposed to external parties that might want/need to know in order to process messages sent out under the list subscription. This is particularly relevant to large ISPs such as gmail, hotmail, yahoo, AOL etc who have a very difficult time filtering messages accurately. Correspondingly, ESPs doing the sending face a constant battle to have their messages accepted consistently without spam filtering, delivery deferral, rate limiting, and other countermeaures designed to combat spammers rather than legitimate volume deliveries.
 
-A key problem with this data is that it is not portable - if a mailing list is transferred between ESPs, it usually omits all of this information, and it's unsual for ESPs to even have a mechansim for importing this data, despite its importance. It's also bulky and inconvenient. This has been a key contributing factor to the rise of unscrupulous list sellers, and a corresponding rise in spam.
+A key problem with this data is that it is not portable - if a mailing list is transferred between ESPs, it usually omits all of this information, and it's unsual for ESPs to even have a mechanism for importing this data, despite its importance. It's also bulky and inconvenient. This has been a key contributing factor to the rise of unscrupulous list sellers, and a corresponding rise in spam.
 
 There is a potential legal conflict: ESPs are required to retain this data to "prove" opt-in, but at the same time it contains personal data (particularly IP and email address) which are subject to GDPR data protection rules.
 
@@ -46,5 +46,7 @@ The solution must be:
 
 ## Random discussion
 This problem was partly solved in the distant past, in the days before the web; confirmation was done by replying to the subscription email message also by email, rather than using an HTTP link. Though it was not used at the time, this could be turned into a far more concrete proof nowadays because the return message could be provable via mechanisms such as DKIM. The problem with that is that not everyone implements DKIM, and it's much less convenient than a simple HTTP link. An added advantage is that a receiver replying *to* an address will probably mean that other messages *from* that address will be whitelisted in future.
+
+DKIM is currently only used for signing email - but its authors had the foresight not to restrict it to that. The [RFC6376 service type field](https://tools.ietf.org/html/rfc6376#section-7.8) that's placed in DKIM headers can be extended to use the signature for other purposes, like this idea.
 
 To be useful, the proof must contain elements from both the sender and receiver; the sender has no control over how the receiver handles the message, so information must be obtained passively.
