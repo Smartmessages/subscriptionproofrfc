@@ -61,4 +61,4 @@ which provides a callback service to the ESP, but also gives the receiver an opp
 1. know that the subscription was accepted so that it can allow-list the source in spam filters
 1. sign the response so that the ESP has a verifiable receipt that it can use to prove the subscription.
 
-In order to prevent abuse of this callback, the sender could perhaps set some other DNS record that can be used to verify callback addresses. This signed response can also verifiable provide proof of subscription when transferring lists between ESPs.
+In order to prevent abuse of this callback (e.g. for SSRF), the sender could perhaps set some other DNS record that can be used to verify callback addresses. This signed response can also provide verifiable proof of subscription when transferring lists between ESPs.
