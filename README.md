@@ -49,4 +49,16 @@ This problem was partly solved in the distant past, in the days before the web; 
 
 DKIM is currently only used for signing email - but its authors had the foresight not to restrict it to that. The [RFC6376 service type field](https://tools.ietf.org/html/rfc6376#section-7.8) that's placed in DKIM headers can be extended to use the signature for other purposes, like this idea.
 
-To be useful, the proof must contain elements from both the sender and receiver; the sender has no control over how the receiver handles the message, so information must be obtained passively.
+### Receiver signing service
+A key problem with the currrent system is that verification is performed by the sender, and that means it's easy for them to forge evidence. Perhaps a better approach would be to get the receiving system to offer a confirmation service, maybe something that could live in the `/.well-known` space like web-based ACME verifications do. If I'm an ESP sending an opt-in confirmation to some user `@gmail.com`, the verification link could point at a URL on the host's MX, something like: 
+
+```
+https://smtp.gmail.com/.well-known/list-subscribe-confirm?id=abc123&sender_callback=https%3A%2F%2Fesp.example.com%2Fconfirm%5Fsubscribe.php`
+```
+
+which provides a callback service to the ESP, but also gives the receiver an opportunity to:
+
+1. know that the subscription was accepted so that it can allow-list the source in spam filters
+1. sign the response so that the ESP has a verifiable receipt that it can use to prove the subscription.
+
+In order to prevent abuse of this callback, the sender could perhaps set some other DNS record that can be used to verify callback addresses. This signed response can also verifiable provide proof of subscription when transferring lists between ESPs.
