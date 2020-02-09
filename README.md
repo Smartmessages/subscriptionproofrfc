@@ -3,7 +3,7 @@
 This document serves as a discussion area for the aims of this project - it is not the project itself.
 
 ## The problem
-Mailing list subscriptions are typically created using a "double-opt-in" process, where a potential subscriber requests a subscription (the first "opt-in") and is sent an email message containing an HTTP confirmation link, which they click to verify and approve the subscription (the second "opt-in", hence "double-opt-in"). As this is done, various pieces of evidence can be collected in order to prove that this transaction took place. These are typically:
+Mailing list subscriptions are typically created using a "double-opt-in" process, where a potential subscriber requests a subscription (the first "opt-in") and is sent an email message containing an HTTP confirmation link, which they click to verify and approve the subscription (the second "opt-in", hence "double-opt-in"). The second opt-in is required as the first alone does not provide sufficient evidence that the address provided really did send the request - it could be spoofed. During this process various pieces of evidence can be collected in order to prove that this transaction took place. These are typically:
 
 * The email address that requested the subscription
 * A timestamp
